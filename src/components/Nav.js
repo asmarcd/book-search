@@ -1,23 +1,32 @@
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
-import { Typography } from '@material-ui/core';
+import { ButtonGroup, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 
 const Nav = () => {
-    const classes = this.props;
+
+    const [page, setPage] = useState("search")
+
+    const updatePage = e => {
+        console.log(e)
+        setPage(e.target.value)
+    };
+
     return (
-        <AppBar position="static">
+        <AppBar>
             <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" className={classes.title}>
-                    News
-    </Typography>
-                <Button color="inherit">Login</Button>
+                <Typography variant="h6">
+                    Google Books Search
+                </Typography>
+                <ButtonGroup variant="contained">
+                    <Button value = "search" onClick={updatePage}>
+                        Search
+                    </Button>
+                    <Button value = "saved" onClick={updatePage}>
+                        Saved Books
+                    </Button>
+                </ButtonGroup>
             </Toolbar>
         </AppBar>
     )
