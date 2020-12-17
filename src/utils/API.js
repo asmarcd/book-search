@@ -3,8 +3,10 @@ const URL_PREFIX = "http://localhost:3001"
 
 const API = {
     titleSearch:function(titleInput){
-        console.log(`"API" + ${titleInput}`)
-        return "data"
+        AJAX(`https://www.googleapis.com/books/v1/volumes?q=search-terms&key=${API_KEY}`)
+        .then(response => response.json())
+        // Need to fix the line below once I get the API call to work.
+        .then(this.setState({books}))
     }
 
 }
