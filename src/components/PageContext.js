@@ -3,7 +3,7 @@ import React, {useState, createContext} from 'react';
 export const PageContext = createContext();
 
 export const PageProvider = props => {
-    const [page, setPage] = useState("instructions");
+    const [page, setPage] = useState("search");
 
     return (
         <PageContext.Provider value={[page, setPage]}>

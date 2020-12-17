@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { PageContext } from './PageContext'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from "@material-ui/core/Toolbar";
