@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import API from '../utils/API'
+import { BookContext } from './BookContext'
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -32,8 +35,24 @@ const useStyles = makeStyles({
     }
 });
 
-const Book = ({ title, author, description, image, link }) => {
+const Book = ({ title, author, description, image, link, id }) => {
     const classes = useStyles();
+
+    const [books, setBooks] = useContext(BookContext);
+
+    const addBook = e => {
+        books.forEach(book => {
+            if (book.id === e.target.value) {
+                API.saveBook({
+                    title: book.volumeInfo.title,
+                    author: book.volumeInfo.authors[0],
+                    description: book.volumeInfo.description,
+                    image: book.volumeInfo.imageLinks.thumbnail,
+                    link: book.infoLink
+                })
+            }
+        })
+    }
 
     return (
         <Card className={classes.root} variant="outlined">
@@ -61,7 +80,7 @@ const Book = ({ title, author, description, image, link }) => {
             </CardContent>
             <CardActions className={classes.buttons}>
                 <Button size="small" href={link}>Learn More on Google Books</Button>
-                <IconButton>
+                <IconButton onClick={addBook} value={id}>
                     <SaveIcon />
                 </IconButton>
             </CardActions>
