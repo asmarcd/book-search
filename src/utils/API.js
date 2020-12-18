@@ -1,19 +1,18 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API = {
-    titleSearch: function (titleInput) {
-        return fetch(`https://www.googleapis.com/books/v1/volumes?q=${titleInput}+intitle&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
-            .then(response => response.json())
-    },
-    getAllBooks: function () {
-        API.get('/books')
-    },
-    saveBook: function (newBook) {
-        API.post('/book', newBook)
-    },
-    deleteBook: function (id) {
-        API.deleteBook(`/book/${id}`)
-    }
+const API = axios.create({
+    baseURL: `http://localhost:3000/api`
+});
+
+export const getAllBooks = () => API.get('/books');
+export const saveBook = newBook => API.post('/book', newBook);
+export const deleteBook = id => API.deleteBook(`/book/${id}`);
+
+
+const apis = {
+    getAllBooks,
+    saveBook,
+    deleteBook
 }
 
-module.exports = API;
+export default apis

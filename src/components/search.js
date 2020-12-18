@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Typography } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import API from './../utils/API';
+import GBAPI from '../utils/GBAPI';
 import Book from './Book';
 
 const Search = () => {
@@ -16,10 +16,9 @@ const Search = () => {
 
     const googleBooksSearch = () => {
         setBooks([])
-        API.titleSearch(bookSearch)
+        GBAPI.titleSearch(bookSearch)
         .then(results => {
             setBooks(results.items)
-            console.log(results.items)
         })
     }
 
