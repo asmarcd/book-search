@@ -24,6 +24,7 @@ const Search = () => {
     }
 
     return (
+        // TODO: Typography below needs to be updated now that I get how it works.
         <Typography>
             <p>Search by Title</p>
         <Input placeholder = "Title" onChange = {manageInput} value={bookSearch.title}/>

@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     }
 });
 
-const Book = ({ title, authors, description, image, link }) => {
+const Book = ({ title, author, description, image, link }) => {
     const classes = useStyles();
 
     return (
@@ -41,10 +41,10 @@ const Book = ({ title, authors, description, image, link }) => {
                 <Typography variant="h5" component="h2">
                     {title}
                 </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                    {author}
+                </Typography>
                 <Grid container>
-                    <Typography className={classes.pos} color="textSecondary">
-                        {authors}
-                    </Typography>
                     <Grid item>
                         <Typography variant="body2" component="p" className={classes.body}>
                             {description}
@@ -60,7 +60,7 @@ const Book = ({ title, authors, description, image, link }) => {
                 </Grid>
             </CardContent>
             <CardActions className={classes.buttons}>
-                <Button size="small" href={link}>Learn More</Button>
+                <Button size="small" href={link}>Learn More on Google Books</Button>
                 <IconButton>
                     <SaveIcon />
                 </IconButton>
