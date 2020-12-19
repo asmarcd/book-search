@@ -26,6 +26,7 @@ const Search = () => {
 
     return (
         // TODO: Typography below needs to be updated now that I get how it works.
+        // TODO: the google books api doesn't always have all the below info. if it's missing somethnig, like the book doesn't have an author, or you get no results, it crashes the app when you submit the search.
         <Typography>
             <p>Search by Title</p>
             <Input placeholder="Title" onChange={manageInput} value={bookSearch.title} />

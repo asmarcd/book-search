@@ -1,25 +1,42 @@
-const express = require('express')
+const express = require("express");
+const logger = require("morgan");
+const mongoose = require("mongoose");
+const compression = require("compression");
+
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const path = require('path')
 
-const db = require('./db')
-const bookRouter = require('./routes/book-router')
+const PORT = process.env.PORT || 3000;
 
-const app = express()
-const apiPort = process.env.PORT || 3000
+const app = express();
+
+app.use(logger("dev"));
+
+app.use(compression());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(bodyParser.json())
 // app.use(express.static(path.join(_dirname, "client", "build")))
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+app.use(express.static("public"));
 
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/googlebooks',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
+
+const bookRouter = require('./routes/book-router')
 app.use('/api', bookRouter)
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(_dirname, "client", "build", "index.html"));
-});
-
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}!`);
+  });
