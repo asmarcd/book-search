@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, "client/public/index.html")))
+app.use(express.static(path.join(__dirname, "client/public")))
 
 app.use(express.static("public"));
 
@@ -38,7 +38,7 @@ const bookRouter = require('./routes/book-router')
 app.use('/api', bookRouter)
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/public/index.html"));
+  res.sendFile(path.join(__dirname, "client/public"));
 });
 
 app.listen(PORT, () => {
