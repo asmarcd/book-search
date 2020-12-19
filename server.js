@@ -4,7 +4,7 @@ const cors = require('cors')
 const path = require('path')
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbExample", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", { useNewUrlParser: true });
 
 const db = require('./db')
 const bookRouter = require('./routes/book-router')
