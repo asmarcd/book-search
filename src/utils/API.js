@@ -6,7 +6,7 @@ const API = axios.create({
 
 export const getAllBooks = () => API.get('/books');
 export const saveBook = newBook => API.post('/book', newBook);
-export const deleteBook = id => API.deleteBook(`/book/${id}`);
+export const deleteBook = id => API.delete(`/book/${id}`);
 
 
 const apis = {

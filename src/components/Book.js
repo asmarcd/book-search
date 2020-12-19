@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import API from '../utils/API'
-import { BookContext } from './BookContext'
+import API from '../utils/API';
+import { BookContext } from './BookContext';
+import { PageContext } from './PageContext';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -9,9 +10,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
-import SaveIcon from '@material-ui/icons/Save'
-import IconButton from '@material-ui/core/IconButton'
-import Grid from '@material-ui/core/Grid'
+import SaveIcon from '@material-ui/icons/Save';
+import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid';
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const useStyles = makeStyles({
     root: {
@@ -39,11 +41,13 @@ const Book = ({ title, author, description, image, link, id }) => {
     const classes = useStyles();
 
     const [books, setBooks] = useContext(BookContext);
+    const [page, setPage] = useContext(PageContext)
 
     const addBook = e => {
         books.forEach(book => {
             if (book.id === e.target.value) {
                 API.saveBook({
+                    id: book.id,
                     title: book.volumeInfo.title,
                     author: book.volumeInfo.authors[0],
                     description: book.volumeInfo.description,
@@ -52,40 +56,88 @@ const Book = ({ title, author, description, image, link, id }) => {
                 })
             }
         })
-    }
+    };
 
-    return (
-        <Card className={classes.root} variant="outlined">
-            <CardContent>
-                <Typography variant="h5" component="h2">
-                    {title}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    {author}
-                </Typography>
-                <Grid container>
-                    <Grid item>
-                        <Typography variant="body2" component="p" className={classes.body}>
-                            {description}
-                        </Typography>
+    const removeBook = e => {
+        API.getAllBooks().then(result => {
+            let library = result.data.data;
+            library.forEach(book => {
+                if (book._id === e.target.value) {
+                    API.deleteBook(book._id)
+                }
+            })
+        })
+    };
+
+    if (page === "search") {
+        return (
+            <Card className={classes.root} variant="outlined">
+                <CardContent>
+                    <Typography variant="h5" component="h2">
+                        {title}
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                        {author}
+                    </Typography>
+                    <Grid container>
+                        <Grid item>
+                            <Typography variant="body2" component="p" className={classes.body}>
+                                {description}
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <CardMedia className={classes.media}
+                                component="img"
+                                alt="Book Cover"
+                                image={image}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <CardMedia className={classes.media}
-                            component="img"
-                            alt="Book Cover"
-                            image={image}
-                        />
+                </CardContent>
+                <CardActions className={classes.buttons}>
+                    <Button size="small" href={link}>Learn More on Google Books</Button>
+                    <IconButton onClick={addBook} value={id}>
+                        <SaveIcon />
+                    </IconButton>
+                </CardActions>
+            </Card >
+        );
+    };
+
+    if (page === "saved") {
+        return (
+            <Card className={classes.root} variant="outlined">
+                <CardContent>
+                    <Typography variant="h5" component="h2">
+                        {title}
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                        {author}
+                    </Typography>
+                    <Grid container>
+                        <Grid item>
+                            <Typography variant="body2" component="p" className={classes.body}>
+                                {description}
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <CardMedia className={classes.media}
+                                component="img"
+                                alt="Book Cover"
+                                image={image}
+                            />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </CardContent>
-            <CardActions className={classes.buttons}>
-                <Button size="small" href={link}>Learn More on Google Books</Button>
-                <IconButton onClick={addBook} value={id}>
-                    <SaveIcon />
-                </IconButton>
-            </CardActions>
-        </Card >
-    );
+                </CardContent>
+                <CardActions className={classes.buttons}>
+                    <Button size="small" href={link}>Learn More on Google Books</Button>
+                    <IconButton onClick={removeBook} value={id}>
+                        <DeleteIcon />
+                    </IconButton>
+                </CardActions>
+            </Card >
+        )
+    }
 };
 
 export default Book;

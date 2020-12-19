@@ -17,7 +17,7 @@ const Saved = () => {
     return (
         <div>
             {library.map(book => (
-                <Book title={book.title} author={book.author} description={book.description} image={book.image} link={book.link} />
+                <Book title={book.title} author={book.author} description={book.description} image={book.image} link={book.link} id={book._id}/>
             ))}
         </div>
     );
