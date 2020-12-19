@@ -20,7 +20,11 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(bodyParser.json())
-app.use(express.static(__dirname, "client"))
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://localhost/googlebooks',
