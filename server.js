@@ -20,9 +20,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, "client/public")))
-
-app.use(express.static("public"));
+app.use(express.static("client/public"))
 
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://localhost/googlebooks',
@@ -37,9 +35,9 @@ mongoose.connect(
 const bookRouter = require('./routes/book-router')
 app.use('/api', bookRouter)
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/public"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client/public"));
+// });
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
