@@ -4,14 +4,14 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 app.get('/', (req,res) => {
   return "Hello"
 });
 
 app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  res.sendFile(path.join(__dirname+'/client/public/index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
