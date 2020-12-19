@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import API from '../utils/API';
 import { BookContext } from './BookContext';
 import { PageContext } from './PageContext';

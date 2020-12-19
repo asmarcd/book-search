@@ -17,6 +17,7 @@ const Search = () => {
     }
 
     const googleBooksSearch = () => {
+        console.log(bookSearch)
         GBAPI.titleSearch(bookSearch)
             .then(results => {
                 setBooks(results.items)
