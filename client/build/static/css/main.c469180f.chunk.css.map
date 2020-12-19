@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/App.css"],"names":[],"mappings":"AAAA,KACI,iBAAkB,CAClB,eACJ,CAEA,SACI,mBACJ","file":"main.c469180f.chunk.css","sourcesContent":[".App {\r\n    text-align: center;\r\n    margin-top: 60px;\r\n}\r\n\r\nButton > * {\r\n    pointer-events: none;\r\n}"]}
