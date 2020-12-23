@@ -7,6 +7,7 @@
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.8",
     "morgan": "^1.10.0"
@@ -15,7 +16,7 @@
   "scripts": {
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
-},
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/asmarcd/book-search.git"
@@ -29,5 +30,5 @@
   "homepage": "https://github.com/asmarcd/book-search#readme",
   "engines": {
     "node": "12.18.3"
-}
+  }
 }
