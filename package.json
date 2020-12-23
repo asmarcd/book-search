@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "postinstall": "npm run build",
+    "postinstall": "cd client && npm run build",
     "start": "node server.js"
   },
   "repository": {
