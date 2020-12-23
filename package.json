@@ -13,9 +13,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/asmarcd/book-search.git"
@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/asmarcd/book-search/issues"
   },
-  "homepage": "https://github.com/asmarcd/book-search#readme"
+  "homepage": "https://github.com/asmarcd/book-search#readme",
+  "engines": {
+    "node": "12.18.3"
+}
 }
