@@ -8,7 +8,9 @@ const Saved = () => {
     const [library, setLibrary] = useState([]);
 
     useEffect(() => {
+        console.log("useeffect")
         API.getAllBooks().then(bookList => {
+            console.log(bookList)
             setLibrary(bookList.data.data)
             console.log(library)
         })

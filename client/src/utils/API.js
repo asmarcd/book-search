@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: `http://localhost:3000/api`
+    baseURL: `/api`
 });
 
 export const getAllBooks = () => API.get('/books');
 export const saveBook = newBook => API.post('/book', newBook);
 export const deleteBook = id => API.delete(`/book/${id}`);
-
 
 const apis = {
     getAllBooks,
