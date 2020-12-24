@@ -24,7 +24,6 @@ const Search = () => {
     }
 
     return (
-
         <Typography>
             <Input placeholder="Search Books by Title" onChange={manageInput} value={bookSearch.title} />
             <Button onClick={googleBooksSearch}>Search</Button>
