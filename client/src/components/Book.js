@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import API from '../utils/API';
 import { BookContext } from './BookContext';
 import { PageContext } from './PageContext';
@@ -14,6 +14,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete'
+import Snackbar from '@material-ui/core/Snackbar'
+import Alert from '@material-ui/lab/Alert'
 
 const useStyles = makeStyles({
     root: {
@@ -42,6 +44,7 @@ const Book = ({ title, author, description, image, link, id, deleteItem }) => {
 
     const [books, setBooks] = useContext(BookContext);
     const [page, setPage] = useContext(PageContext)
+    const [open, setOpen] = useState(false);
 
     const addBook = e => {
         books.forEach(book => {
@@ -56,6 +59,7 @@ const Book = ({ title, author, description, image, link, id, deleteItem }) => {
                 })
             }
         })
+        setOpen(true);
     };
 
     const removeBook = e => {
@@ -68,6 +72,13 @@ const Book = ({ title, author, description, image, link, id, deleteItem }) => {
             })
             deleteItem();
         })
+    };
+
+    const handleClose = (e, r) => {
+        if (r==="clickaway") {
+            return;
+        }
+        setOpen(false);
     };
 
     if (page === "search") {
@@ -100,6 +111,12 @@ const Book = ({ title, author, description, image, link, id, deleteItem }) => {
                     <IconButton onClick={addBook} value={id}>
                         <SaveIcon />
                     </IconButton>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success">
+                            Book Saved!
+                        </Alert>
+                    </Snackbar>
+
                 </CardActions>
             </Card >
         );
