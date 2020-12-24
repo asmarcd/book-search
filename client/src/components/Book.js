@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     }
 });
 
-const Book = ({ title, author, description, image, link, id }) => {
+const Book = ({ title, author, description, image, link, id, deleteItem }) => {
     const classes = useStyles();
 
     const [books, setBooks] = useContext(BookContext);
@@ -66,6 +66,7 @@ const Book = ({ title, author, description, image, link, id }) => {
                     API.deleteBook(book._id)
                 }
             })
+            deleteItem();
         })
     };
 
