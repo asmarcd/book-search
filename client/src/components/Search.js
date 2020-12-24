@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button';
 
 const Search = () => {
 
+    let setAuthor = "";
+
     const [bookSearch, setBookSearch] = useState("");
     const [books, setBooks] = useContext(BookContext)
 
@@ -17,7 +19,6 @@ const Search = () => {
     }
 
     const googleBooksSearch = () => {
-        console.log(bookSearch)
         GBAPI.titleSearch(bookSearch)
             .then(results => {
                 setBooks(results.items)
@@ -33,7 +34,7 @@ const Search = () => {
             <Button onClick={googleBooksSearch}>Search</Button>
             <div>
                 {books.map(book => (
-                    <Book title={book.volumeInfo.title} author={book.volumeInfo.authors[0]} description={book.volumeInfo.description} image={book.volumeInfo.imageLinks.thumbnail} link={book.volumeInfo.infoLink} id={book.id} />
+                    <Book title={book.volumeInfo.title} author={book.volumeInfo.author[0]} description={book.volumeInfo.description} image={book.volumeInfo.imageLinks.thumbnail} link={book.volumeInfo.infoLink} id={book.id} />
                 ))}
             </div>
 
